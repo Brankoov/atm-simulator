@@ -10,4 +10,7 @@ public class AuthService {
         return "12345678".equals(cardNumber)&&"1234".equals(pin);
 
     }
+    public Account getAccount() {
+        return account;
+    }
 }
