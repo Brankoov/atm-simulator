@@ -13,4 +13,7 @@ public class AuthService {
     public Account getAccount() {
         return account;
     }
+    public void deposit(double amount) {
+        account.setBalance(account.getBalance() + amount);
+    }
 }
