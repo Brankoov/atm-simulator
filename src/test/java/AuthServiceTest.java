@@ -71,8 +71,11 @@ public class AuthServiceTest {
     @Test
     void withdrawShouldGenerateCorrectReceipt() {
         AuthService authService = new AuthService();
-        String receipt = authService.withdraw(200);
-        assert receipt.contains("Uttag: ");
+        boolean success = authService.withdraw(200);
+        assertTrue(success);
+
+        String receipt = authService.getWithdrawReceipt("200");
+        assert receipt.contains("Uttag: 200");
         assertTrue(receipt.contains("Ny balans:"));
 
     }
