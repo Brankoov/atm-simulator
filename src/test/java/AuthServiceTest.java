@@ -43,5 +43,16 @@ public class AuthServiceTest {
         assertEquals(1500.00, auth.getAccount().getBalance());
     }
 
+    @Test
+    void testWithdrawShouldDecreaseBalanceIfEnoughMoney() {
+        AuthService auth = new AuthService();
+        auth.login("12345678", "1234");
+
+        boolean result = auth.withdraw(300);
+        assertTrue(result);
+        assertEquals(700.00, auth.getAccount().getBalance());
+    }
+
+
 
 }
