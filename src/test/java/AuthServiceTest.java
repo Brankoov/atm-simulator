@@ -61,6 +61,13 @@ public class AuthServiceTest {
         assertFalse(result);
         assertEquals(1000.00, auth.getAccount().getBalance());
     }
+    @Test
+    void depositShouldGenerateCorrectReceipt() {
+        AuthService authService = new AuthService();
+        String receipt = authService.deposit(200);
+        assertTrue(receipt.contains("Insättning: 200"));
+        assertTrue(receipt.contains("Ny balans:"));
+    }
 
 
 
