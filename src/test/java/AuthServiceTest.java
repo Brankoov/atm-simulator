@@ -68,6 +68,14 @@ public class AuthServiceTest {
         assertTrue(receipt.contains("Insättning: 200"));
         assertTrue(receipt.contains("Ny balans:"));
     }
+    @Test
+    void withdrawShouldGenerateCorrectReceipt() {
+        AuthService authService = new AuthService();
+        String receipt = authService.withdraw(200);
+        assert receipt.contains("Uttag: ");
+        assertTrue(receipt.contains("Ny balans:"));
+
+    }
 
 
 
