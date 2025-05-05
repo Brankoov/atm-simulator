@@ -13,5 +13,12 @@ public class AuthServiceTest {
         assertTrue(result);
     }
 
+    @Test
+    void testGetBalanceShouldReturnCurrentBalance() {
+        AuthService auth = new AuthService();
+        auth.login("12345678", "1234");
 
+        double balance = auth.getAccount().getBalance();
+        assertEquals(1000.00, balance);
+    }
 }
