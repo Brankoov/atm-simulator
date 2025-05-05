@@ -48,8 +48,10 @@ public class AuthServiceTest {
         AuthService auth = new AuthService();
         auth.login("12345678", "1234");
 
-        boolean result = auth.withdraw(300);
-        assertTrue(result);
+        // Testa uttag och kontrollera om kvittot innehåller rätt information
+        String result = auth.withdraw(300);
+        assertTrue(result.contains("Uttag: 300"));
+        assertTrue(result.contains("Ny balans:"));
         assertEquals(700.00, auth.getAccount().getBalance());
     }
     @Test
@@ -57,8 +59,9 @@ public class AuthServiceTest {
         AuthService auth = new AuthService();
         auth.login("12345678", "1234");
 
-        boolean result = auth.withdraw(2000.00);
-        assertFalse(result);
+        // Försök med ett uttag större än balansen och kolla om rätt felmeddelande returneras
+        String result = auth.withdraw(2000.00);
+        assertEquals("Otillräckligt saldo. Uttag misslyckades.", result);
         assertEquals(1000.00, auth.getAccount().getBalance());
     }
     @Test
@@ -71,14 +74,13 @@ public class AuthServiceTest {
     @Test
     void withdrawShouldGenerateCorrectReceipt() {
         AuthService authService = new AuthService();
-        boolean success = authService.withdraw(200);
-        assertTrue(success);
+        String receipt = authService.withdraw(200);
 
-        String receipt = authService.getWithdrawReceipt("200");
-        assert receipt.contains("Uttag: 200");
+        // Kontrollera att kvittot för uttaget genererades korrekt
+        assertTrue(receipt.contains("Uttag: 200"));
         assertTrue(receipt.contains("Ny balans:"));
-
     }
+
 
 
 

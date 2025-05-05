@@ -10,6 +10,9 @@ public class AuthService {
         return "12345678".equals(cardNumber)&&"1234".equals(pin);
 
     }
+    public String showBalance(){
+        return("Saldo: "+account.getBalance());
+    }
     public Account getAccount() {
         return account;
     }
@@ -22,14 +25,13 @@ public class AuthService {
         }
         return "Ogiltigt belopp.";
     }
-    public boolean withdraw(double amount) {
+    public String withdraw(double amount) {
         if (amount > account.getBalance()) {
-            return false;
+            return "Otillräckligt saldo. Uttag misslyckades.";
         }
         account.setBalance(account.getBalance() - amount);
-        return true;
+        return receiptService.generateWithdrawReceipt(amount, account.getBalance());
     }
-
 
 
 }

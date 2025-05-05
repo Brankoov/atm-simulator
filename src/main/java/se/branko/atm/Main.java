@@ -8,7 +8,16 @@ public class Main {
 
         AuthService authService = new AuthService();
 
-        authService.login("12345678", "1234");
+        boolean loginSuccess = authService.login("12345678", "1234");
+        System.out.println(loginSuccess);
+
+
+        // Anropar withdraw och skriver ut kvittot för uttaget
+        String withdrawReceipt = authService.withdraw(200);
+        System.out.println(withdrawReceipt);
+
+        String depositReceipt = authService.deposit(200);
+        System.out.println(depositReceipt);
 
     }
 }
