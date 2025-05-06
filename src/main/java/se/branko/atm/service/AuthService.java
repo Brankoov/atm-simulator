@@ -10,8 +10,8 @@ public class AuthService {
         return "12345678".equals(cardNumber)&&"1234".equals(pin);
 
     }
-    public String showBalance(){
-        return("Saldo: "+account.getBalance());
+    public void showBalance(){
+        System.out.println("Saldo: " + account.getBalance());
     }
     public Account getAccount() {
         return account;

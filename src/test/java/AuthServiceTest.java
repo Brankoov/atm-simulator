@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AuthServiceTest {
 
 
+
     @Test
     void shouldLogInWithCorrectCardNumberAndPassword() {
         AuthService authServiceTest = new AuthService();
