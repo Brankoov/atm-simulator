@@ -2,22 +2,30 @@ package se.branko.atm;
 
 import se.branko.atm.service.AuthService;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 
-
+        Scanner scanner = new Scanner(System.in);
         AuthService authService = new AuthService();
 
-        boolean loginSuccess = authService.login("12345678", "1234");
-        System.out.println(loginSuccess);
+        boolean loggedIn = false;
+
+        // Inloggning först
+        while (!loggedIn) {
+            System.out.print("Kortnummer: ");
+            String cardNumber = scanner.nextLine();
+            System.out.print("PIN-kod: ");
+            String pin = scanner.nextLine();
+
+            loggedIn = authService.login(cardNumber, pin);
+            if (!loggedIn) {
+                System.out.println("Fel kortnummer eller PIN. Försök igen.\n");
+            }
+        }
 
 
-        // Anropar withdraw och skriver ut kvittot för uttaget
-        String withdrawReceipt = authService.withdraw(200);
-        System.out.println(withdrawReceipt);
-
-        String depositReceipt = authService.deposit(200);
-        System.out.println(depositReceipt);
 
     }
 }
