@@ -18,7 +18,7 @@ public class AuthService {
     }
 
     public String deposit(double amount) {
-        if (amount > 0) {
+        if (amount > 0 && amount < 100000) {
             double newBalance = account.getBalance() + amount;
             account.setBalance(newBalance);
             return receiptService.generateDepositReceipt(amount, newBalance);
