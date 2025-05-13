@@ -21,7 +21,7 @@ public class AuthService {
         if (amount > 0 && amount < 100000) {
             double newBalance = account.getBalance() + amount;
             account.setBalance(newBalance);
-            return receiptService.generateDepositReceipt(amount, newBalance);
+            return receiptService.generateReceipt(amount, newBalance);
         }
         return "Ogiltigt belopp.";
     }
@@ -30,7 +30,7 @@ public class AuthService {
             return "Otillräckligt saldo. Uttag misslyckades.";
         }
         account.setBalance(account.getBalance() - amount);
-        return receiptService.generateWithdrawReceipt(amount, account.getBalance());
+        return receiptService.generateReceipt(amount, account.getBalance());
     }
 
 
