@@ -1,6 +1,7 @@
 package se.branko.atm.service;
 
 import se.branko.atm.model.Account;
+import se.branko.atm.model.ReceiptType;
 
 public class AuthService {
     Account account = new Account("12345678", "1234", 1000.00);
@@ -18,10 +19,10 @@ public class AuthService {
     }
 
     public String deposit(double amount) {
-        if (amount > 0 && amount < 100000) {
+        if (amount > 0 && amount < 100_000) {
             double newBalance = account.getBalance() + amount;
             account.setBalance(newBalance);
-            return receiptService.generateReceipt(amount, newBalance);
+            return receiptService.generateReceipt(ReceiptType.DEPOSIT, amount, newBalance);
         }
         return "Ogiltigt belopp.";
     }
@@ -30,7 +31,7 @@ public class AuthService {
             return "Otillräckligt saldo. Uttag misslyckades.";
         }
         account.setBalance(account.getBalance() - amount);
-        return receiptService.generateReceipt(amount, account.getBalance());
+        return receiptService.generateReceipt(ReceiptType.WITHDRAW, amount, account.getBalance());
     }
 
 
