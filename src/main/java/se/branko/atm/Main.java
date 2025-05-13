@@ -1,6 +1,10 @@
 package se.branko.atm;
 
+import se.branko.atm.model.Account;
+import se.branko.atm.service.AtmService;
 import se.branko.atm.service.AuthService;
+import se.branko.atm.service.Bank;
+import se.branko.atm.service.ReceiptService;
 
 import java.util.Scanner;
 
@@ -8,11 +12,14 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        AuthService authService = new AuthService();
+
+        Account account = new Account("12345678", "1234", 1000.00);
+        ReceiptService receiptService = new ReceiptService();
+        AuthService authService = new AuthService(account);
+        Bank bank = new AtmService(account, receiptService); // Polymorfism!
 
         boolean loggedIn = false;
 
-        // Inloggning först
         while (!loggedIn) {
             System.out.print("Kortnummer: ");
             String cardNumber = scanner.nextLine();
@@ -36,17 +43,17 @@ public class Main {
 
             switch (choice) {
                 case "1":
-                    authService.showBalance();
+                    bank.showBalance();
                     break;
                 case "2":
                     System.out.print("Ange belopp att sätta in: ");
                     double deposit = Double.parseDouble(scanner.nextLine());
-                    System.out.println(authService.deposit(deposit));
+                    System.out.println(bank.deposit(deposit));
                     break;
                 case "3":
                     System.out.print("Ange belopp att ta ut: ");
                     double withdraw = Double.parseDouble(scanner.nextLine());
-                    System.out.println(authService.withdraw(withdraw));
+                    System.out.println(bank.withdraw(withdraw));
                     break;
                 case "4":
                     System.out.println("Tack och hej!");
