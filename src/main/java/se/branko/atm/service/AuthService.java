@@ -11,6 +11,9 @@ public class AuthService {
     }
 
     public boolean login(String cardNumber, String pin) {
+        if (cardNumber == null || pin == null || cardNumber.isEmpty() || pin.isEmpty()) {
+            return false;
+        }
         return account.getCardNumber().equals(cardNumber) && account.getPin().equals(pin);
     }
 

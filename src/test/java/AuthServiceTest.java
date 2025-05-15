@@ -30,4 +30,33 @@ public class AuthServiceTest {
     void loginShouldReturnFalseIfPinIsWrong() {
         assertFalse(auth.login("12345678", "0000"));
     }
+    @Test
+    void loginShouldReturnFalseIfCardNumberIsNull() {
+        assertFalse(auth.login(null, "1234"));
+    }
+
+    @Test
+    void loginShouldReturnFalseIfPinIsNull() {
+        assertFalse(auth.login("12345678", null));
+    }
+
+    @Test
+    void loginShouldReturnFalseIfCardNumberIsEmpty() {
+        assertFalse(auth.login("", "1234"));
+    }
+
+    @Test
+    void loginShouldReturnFalseIfPinIsEmpty() {
+        assertFalse(auth.login("12345678", ""));
+    }
+
+    @Test
+    void loginShouldReturnFalseIfBothInputsAreEmpty() {
+        assertFalse(auth.login("", ""));
+    }
+
+    @Test
+    void loginShouldReturnFalseIfBothInputsAreNull() {
+        assertFalse(auth.login(null, null));
+    }
 }
