@@ -20,9 +20,7 @@ public class AtmServiceTest {
     void setUp() {
 
         account = new Account("12345678", "1234", 1000.00);
-
         ReceiptService receiptService = new ReceiptService();
-
         atm = new AtmService(account, receiptService);
 
     }
